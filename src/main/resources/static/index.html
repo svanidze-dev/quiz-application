@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">Quiz</div>
+    <nav class="nav">
+        <a href="#/quizzes" data-page="quizzes">Викторины</a>
+        <a href="#/favorites" data-page="favorites">Избранное</a>
+        <a href="#/history" data-page="history">История</a>
+        <a href="#/stats" data-page="stats">Статистика</a>
+        <a href="#/leaderboard" data-page="leaderboard">Лидеры</a>
+        <a href="#/admin" data-page="admin" id="nav-admin" style="display:none">Админ</a>
+    </nav>
+    <div class="userbox">
+        <span id="current-user" class="muted">Не выполнен вход</span>
+
+        <!-- Кнопки без атрибута hidden, управляем через style в JS -->
+        <button id="nav-login-btn" class="btn small" onclick="openUserAuth('login')">Войти</button>
+        <button id="nav-register-btn" class="btn primary small" onclick="openUserAuth('register')">Регистрация</button>
+        <button id="nav-logout-btn" class="btn danger small" onclick="doLogout()" style="display: none;">Выйти</button>
+    </div>
+</header>
+
+<main id="view" class="view"></main>
+
+<footer class="footer">
+    <span>Quiz Application</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- Универсальное модальное окно: Вход / Регистрация -->
+<div id="user-modal" class="modal">
+    <div class="modal-card">
+        <h2 id="user-modal-title">Вход</h2>
+
+        <div id="user-login-box" class="form-box">
+            <input id="login-username" type="text" placeholder="Имя пользователя" />
+            <input id="login-password" type="password" placeholder="Пароль" />
+            <div class="modal-actions">
+                <button class="btn primary" onclick="doLogin()">Войти</button>
+                <button class="btn" onclick="closeUserAuth()">Отмена</button>
+            </div>
+        </div>
+
+        <div id="user-register-box" class="form-box">
+            <input id="reg-username" type="text" placeholder="Имя пользователя" />
+            <input id="reg-email" type="email" placeholder="Email" />
+            <input id="reg-password" type="password" placeholder="Пароль (мин. 6 символов)" />
+            <div class="modal-actions">
+                <button class="btn primary" onclick="doRegister()">Зарегистрироваться</button>
+                <button class="btn" onclick="closeUserAuth()">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модалка для редактирования викторины (Вопросы и Варианты) -->
+<div id="edit-quiz-modal" class="modal">
+    <div class="modal-card" style="max-width: 800px; text-align: left;">
+        <div class="row between" style="margin-bottom: 24px;">
+            <h2 id="edit-quiz-title" style="margin:0;">Редактирование</h2>
+            <button class="btn small" onclick="closeEditQuiz()">Закрыть</button>
+        </div>
+
+        <div id="edit-quiz-body" style="max-height: 60vh; overflow-y: auto; padding-right: 8px;">
+            <!-- Сюда JS будет рендерить вопросы и формы -->
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
